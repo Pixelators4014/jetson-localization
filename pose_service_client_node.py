@@ -27,16 +27,19 @@ class PoseServiceClient(Node):
         return self.future.result()
 
 
+def serialize_response(poses):
+    return ""
+
 def main(args=None):
     rclpy.init(args=args)
 
-    minimal_client = PoseServiceClient()
-    response = minimal_client.send_request(int(sys.argv[1]), int(sys.argv[2]))
-    minimal_client.get_logger().info(
-        'Result of add_two_ints: for %d + %d = %d' %
-        (int(sys.argv[1]), int(sys.argv[2]), response.sum))
-
-    minimal_client.destroy_node()
+    client = PoseServiceClient()
+    while True:
+        response = client.send_request(int(sys.argv[1]), int(sys.argv[2]))
+        client.sd.putBoolean("vslam_success", response.success)
+        client.sd.putString("vslam_pose", serialize_response(response.poses))
+        if not client.sd.getBoolean("vslam_running"):
+            break
     rclpy.shutdown()
 
 
