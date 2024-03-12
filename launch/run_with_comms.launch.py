@@ -84,6 +84,6 @@ def generate_launch_description():
         output='screen'
     )
 
-    # comms_node = ComposableNode(name='pose_service_client_node')
+    comms_node = ComposableNode(name='pose_service_client_node', package='comms')
 
-    return launch.LaunchDescription([visual_slam_launch_container, realsense_camera_node])
+    return launch.LaunchDescription([visual_slam_launch_container, realsense_camera_node, comms_node])
