@@ -84,4 +84,10 @@ def generate_launch_description():
         output='screen'
     )
 
-    return launch.LaunchDescription([visual_slam_launch_container, realsense_camera_node])
+    comms_node = Node(
+        name='log_pose_client',
+        namespace='log_pose_client',
+        package='jetson-localization'
+    )
+
+    return launch.LaunchDescription([visual_slam_launch_container, realsense_camera_node, comms_node])
