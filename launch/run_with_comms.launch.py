@@ -87,7 +87,7 @@ def generate_launch_description():
     comms_node = Node(
         name='comms_node',
         namespace='',
-        package='jetson-localization',
+        package='comms_node',
         executable='log_pose',
     )
 
