@@ -22,6 +22,7 @@ setup(
         'console_scripts': [
             'log_pose = comms_node.log_pose_client:main',
             'network_tables = comms_node.network_tables_pose_client:main',
+            'log_subscriber = comms_node.log_pose_subscriber:main',
         ],
     },
 )
