@@ -1,6 +1,6 @@
 import sys
 
-from isaac_ros_visual_slam.isaac_ros_visual_slam_interfaces.srv import GetAllPoses
+from isaac_ros_visual_slam_interfaces.srv import GetAllPoses
 import rclpy
 from rclpy.node import Node
 
