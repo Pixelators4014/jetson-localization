@@ -31,8 +31,9 @@ def serialize_response(poses):
     s = ""
     for pose in poses:
         p = pose.pose
-        s += "{:.2f} {:.2f} {:.2f} {:.2f}\n".format(
-            p.x, p.y, p.z, p.w)
+        s += "{} {:.2f} {:.2f} {:.2f} {:.2f} {:.2f} {:.2f} {:.2f}\n".format(
+            pose.header.seq, p.position.x, p.position.y, p.position.z,
+            p.orientation.x, p.orientation.y, p.orientation.z, p.orientation.w)
 
 
 def main(args=None):
