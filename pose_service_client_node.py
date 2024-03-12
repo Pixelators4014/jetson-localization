@@ -28,7 +28,11 @@ class PoseServiceClient(Node):
 
 
 def serialize_response(poses):
-    return ""
+    s = ""
+    for pose in poses:
+        p = pose.pose
+        s += "{:.2f} {:.2f} {:.2f} {:.2f}\n".format(
+            p.x, p.y, p.z, p.w)
 
 
 def main(args=None):
