@@ -11,8 +11,8 @@ class PoseServiceClient(Node):
     def __init__(self):
         super().__init__('get_all_poses_client_async')
         self.cli = self.create_client(GetAllPoses, '/visual_slam_node/get_all_poses')
-        while not self.cli.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info('service not available, waiting again...')
+        while not self.cli.wait_for_service(timeout_sec=5.0):
+            self.get_logger().info('service  not available, waiting again...')
         self.req = GetAllPoses.Request()
         NetworkTables.initialize(server='roborio-XXX-frc.local')
         self.sd = NetworkTables.getTable('SmartDashboard')
