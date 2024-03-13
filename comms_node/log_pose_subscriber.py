@@ -3,13 +3,14 @@ from rclpy.node import Node
 
 from geometry_msgs.msg import PoseStamped
 
+
 class MinimalSubscriber(Node):
 
     def __init__(self):
         super().__init__('minimal_subscriber')
         self.subscription = self.create_subscription(
             PoseStamped,
-            '/visual_slam_node/pose',
+            '/visual_slam/pose',
             self.listener_callback,
             10)
         self.subscription  # prevent unused variable warning
