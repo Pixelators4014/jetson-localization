@@ -23,7 +23,7 @@ class NetworkTablesSlamPathSubscriber(SlamPathSubscriber):
         self.sd = NetworkTables.getTable('Orin')
 
     def listener_callback(self, msg):
-        self.sd.putString("POSE", serialize_response(msg.data))
+        self.sd.putString("POSE", serialize_response(msg.poses))
 
 
 def main(args=None):
