@@ -4,6 +4,3 @@
 [submodule "isaac_ros_common"]
 	path = isaac_ros_common
 	url = https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_common.git
-[submodule "rclpy"]
-	path = rclpy
-	url = https://github.com/ros2/rclpy.git
