@@ -1,7 +1,7 @@
 import rclpy
 from rclpy.node import Node
 
-from std_msgs.msg import String
+from isaac_ros_visual_slam_interfaces.srv import GetAllPoses
 
 
 class MinimalSubscriber(Node):
@@ -9,7 +9,7 @@ class MinimalSubscriber(Node):
     def __init__(self):
         super().__init__('minimal_subscriber')
         self.subscription = self.create_subscription(
-            String,
+            GetAllPoses,
             '/visual_slam_node/pose',
             self.listener_callback,
             10)
