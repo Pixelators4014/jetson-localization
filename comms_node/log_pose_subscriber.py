@@ -10,7 +10,7 @@ class LogSlamPathSubscriber(SlamPathSubscriber):
 
     def listener_callback(self, msg):
         if len(msg.poses) > 0:
-            self.get_logger().info('I heard: "%s"' % msg.poses[-1])
+            self.get_logger().info('I heard: "%s"' % msg.poses[-1].pose)
 
 
 def main(args=None):
