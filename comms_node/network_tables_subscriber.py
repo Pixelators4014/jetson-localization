@@ -1,6 +1,8 @@
 import rclpy
 from rclpy.node import Node
 
+from networktables import NetworkTables
+
 from geometry_msgs.msg import PoseStamped
 
 def serialize_response(poses):
