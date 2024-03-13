@@ -5,6 +5,7 @@ from networktables import NetworkTables
 
 from geometry_msgs.msg import PoseStamped
 
+
 def serialize_response(poses):
     s = ""
     for pose in poses:
@@ -13,6 +14,7 @@ def serialize_response(poses):
             pose.header.stamp.sec, p.position.x, p.position.y, p.position.z,
             p.orientation.x, p.orientation.y, p.orientation.z, p.orientation.w)
     return s
+
 
 class MinimalSubscriber(Node):
     def __init__(self):
@@ -26,8 +28,7 @@ class MinimalSubscriber(Node):
         self.sd = NetworkTables.getTable('Orin')
 
     def listener_callback(self, msg):
-        sd.putString("POSES", serialize_response(msg.data))
-        self.get_logger().info('I heard: "%s"' % msg.data)
+        self.sd.putString("POSE", serialize_response(msg.data))
 
 
 def main(args=None):
@@ -42,7 +43,6 @@ def main(args=None):
     # when the garbage collector destroys the node object)
     subscriber.destroy_node()
     rclpy.shutdown()
-
 
 
 if __name__ == '__main__':

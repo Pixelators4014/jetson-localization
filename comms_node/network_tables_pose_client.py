@@ -24,7 +24,7 @@ def main(args=None):
         time.sleep(0.1)
     while sd.getBoolean("RUNNING", True):
         response = pose_service_client.send_request(4)
-        sd.putString("POSES", serialize_response(response.poses))
+        sd.putString("POSE", serialize_response(response.poses))
     rclpy.shutdown()
 
 
