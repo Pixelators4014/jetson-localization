@@ -3,7 +3,8 @@ from rclpy.node import Node
 
 from networktables import NetworkTables
 
-from geometry_msgs.msg import PoseStamped
+
+from comms_node.slam_path_subscriber import SlamPathSubscriber
 
 
 def serialize_response(poses):
@@ -16,15 +17,9 @@ def serialize_response(poses):
     return s
 
 
-class MinimalSubscriber(Node):
+class NetworkTablesSlamPathSubscriber(SlamPathSubscriber):
     def __init__(self):
-        super().__init__('minimal_subscriber')
-        self.subscription = self.create_subscription(
-            PoseStamped,
-            '/visual_slam/tracking/slam_path',
-            self.listener_callback,
-            10)
-        NetworkTables.initialize(server='roborio-XXX-frc.local')
+        super().__init__('network_tables_pose_subscriber')
         self.sd = NetworkTables.getTable('Orin')
 
     def listener_callback(self, msg):
@@ -34,7 +29,7 @@ class MinimalSubscriber(Node):
 def main(args=None):
     rclpy.init(args=args)
 
-    subscriber = MinimalSubscriber()
+    subscriber = NetworkTablesSlamPathSubscriber()
 
     rclpy.spin(subscriber)
 

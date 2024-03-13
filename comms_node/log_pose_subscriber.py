@@ -1,19 +1,12 @@
 import rclpy
-from rclpy.node import Node
 
-from geometry_msgs.msg import PoseStamped
+from comms_node.slam_path_subscriber import SlamPathSubscriber
 
 
-class MinimalSubscriber(Node):
+class LogSlamPathSubscriber(SlamPathSubscriber):
 
     def __init__(self):
-        super().__init__('minimal_subscriber')
-        self.subscription = self.create_subscription(
-            PoseStamped,
-            '/visual_slam/tracking/slam_path',
-            self.listener_callback,
-            10)
-        self.subscription  # prevent unused variable warning
+        super().__init__('log_pose_subscriber')
 
     def listener_callback(self, msg):
         self.get_logger().info('I heard: "%s"' % msg)
@@ -22,7 +15,7 @@ class MinimalSubscriber(Node):
 def main(args=None):
     rclpy.init(args=args)
 
-    subscriber = MinimalSubscriber()
+    subscriber = LogSlamPathSubscriber()
 
     rclpy.spin(subscriber)
 
