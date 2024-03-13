@@ -88,7 +88,7 @@ def generate_launch_description():
         name='comms_node',
         namespace='',
         package='comms_node',
-        executable='log_pose',
+        executable='log_subscriber',
     )
 
     return launch.LaunchDescription([visual_slam_launch_container, realsense_camera_node, comms_node])
