@@ -2,7 +2,7 @@ import time
 
 import rclpy
 from networktables import NetworkTables
-from pose_service_client import PoseServiceClient
+from comms_node.pose_service_client import PoseServiceClient
 
 
 def serialize_response(poses):
@@ -18,13 +18,13 @@ def serialize_response(poses):
 def main(args=None):
     rclpy.init(args=args)
     NetworkTables.initialize(server='roborio-XXX-frc.local')  # TODO: Replace with actual roborio hostname
-    sd = NetworkTables.getTable('SmartDashboard')
+    sd = NetworkTables.getTable('Orin')
     pose_service_client = PoseServiceClient()
-    while sd.getBoolean("ORIN_RUNNING", False):
+    while sd.getBoolean("RUNNING", False):
         time.sleep(0.1)
-    while sd.getBoolean("ORIN_RUNNING", True):
+    while sd.getBoolean("RUNNING", True):
         response = pose_service_client.send_request(4)
-        sd.putString("ORIN_POSES", serialize_response(response.poses))
+        sd.putString("POSES", serialize_response(response.poses))
     rclpy.shutdown()
 
 

@@ -1,6 +1,6 @@
 import rclpy
 
-from pose_service_client import PoseServiceClient
+from comms_node.pose_service_client import PoseServiceClient
 
 
 def main(args=None):
@@ -8,8 +8,8 @@ def main(args=None):
 
     client = PoseServiceClient()
     while True:
-        response = client.send_request(4)
-        client.get_logger().info("vslam_pose: " + response.poses)
+        response = client.send_request(1)
+        client.get_logger().info("vslam_pose: " + str(response.poses[0]))
     rclpy.shutdown()
 
 
