@@ -10,7 +10,7 @@ class MinimalSubscriber(Node):
         super().__init__('minimal_subscriber')
         self.subscription = self.create_subscription(
             PoseStamped,
-            '/visual_slam/tracking/vo_pose',
+            '/visual_slam/tracking/slam_path',
             self.listener_callback,
             10)
         self.subscription  # prevent unused variable warning
