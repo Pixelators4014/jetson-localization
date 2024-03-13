@@ -19,7 +19,7 @@ class MinimalSubscriber(Node):
         super().__init__('minimal_subscriber')
         self.subscription = self.create_subscription(
             PoseStamped,
-            '/visual_slam_node/tacking/vo_pose',
+            '/visual_slam_node/tracking/vo_pose',
             self.listener_callback,
             10)
         NetworkTables.initialize(server='roborio-XXX-frc.local')
