@@ -11,7 +11,7 @@ class LogSlamPathSubscriber(SlamPathSubscriber):
     def listener_callback(self, msg):
         if len(msg.poses) > 0:
             pose = msg.poses[-1].pose
-            self.get_logger().info(f'Pose: {pose.position.x:2} {pose.position.y:2} {pose.position.z:2}  {pose.orientation.x:2} {pose.orientation.y:2} {pose.orientation.z:2} {pose.orientation.w:2}')
+            self.get_logger().info(f'Pose: {pose.position.x:.2f} {pose.position.y:.2f} {pose.position.z:.2f}  {pose.orientation.x:.2f} {pose.orientation.y:.2f} {pose.orientation.z:.2f} {pose.orientation.w:.2f}')
 
 
 def main(args=None):
