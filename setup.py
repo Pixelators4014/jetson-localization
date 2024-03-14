@@ -16,7 +16,7 @@ setup(
         ('share/' + package_name, ['launch/run_network_tables.launch.py']),
         ('share/' + package_name, ['launch/run_detect.launch.py']),
     ],
-    install_requires=['setuptools'],
+    install_requires=['setuptools', 'pynetworktables'],
     zip_safe=True,
     maintainer='alistair',
     maintainer_email='alistair@keiller.net',
