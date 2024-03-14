@@ -34,7 +34,6 @@ def generate_launch_description():
             'enable_color': True,
             'enable_depth': False,
             'depth_module.emitter_enabled': 0,
-            'rgb_camera.profile': '1920×1080x30',
             'enable_gyro': True,
             'enable_accel': True,
             'gyro_fps': 200,
@@ -49,8 +48,8 @@ def generate_launch_description():
             plugin='nvidia::isaac_ros::dnn_inference::DnnImageEncoderNode',
             name='dnn_image_encoder',
             parameters=[{
-                'input_image_width': 1920,
-                'input_image_height': 1080,
+                'input_image_width': 640,
+                'input_image_height': 480,
                 'network_image_width': 640,
                 'network_image_height': 640,
                 'image_mean': [0.0, 0.0, 0.0],
