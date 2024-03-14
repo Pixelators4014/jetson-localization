@@ -47,18 +47,18 @@ def generate_launch_description():
     # Hardcoded parameters
     model_file_path = '/workspaces/isaac_ros-dev/src/jetson-localization/yolov8s.onnx'
     engine_file_path = '/tmp/yolov8s.plan'
-    input_tensor_names = '["images"]'
-    input_binding_names = '["images"]'
-    output_tensor_names = '["output0"]'
-    output_binding_names = '["output0"]'
-    verbose = 'False'
-    force_engine_update = 'False'
+    input_tensor_names = ["images"]
+    input_binding_names = ["images"]
+    output_tensor_names = ["output0"]
+    output_binding_names = ["output0"]
+    verbose = False
+    force_engine_update = False
     input_image_width = 640
     input_image_height = 640
     network_image_width = 640
     network_image_height = 640
-    image_mean = '[0.0, 0.0, 0.0]'
-    image_stddev = '[1.0, 1.0, 1.0]'
+    image_mean = [0.0, 0.0, 0.0]
+    image_stddev = [1.0, 1.0, 1.0]
     confidence_threshold = 0.25
     nms_threshold = 0.45
 
