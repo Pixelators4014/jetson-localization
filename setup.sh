@@ -1,3 +1,4 @@
+#!/usr/bin/sh
 sudo apt-get install -y ros-humble-isaac-ros-visual-slam \
 ros-humble-isaac-ros-yolov8 ros-humble-isaac-ros-tensor-rt ros-humble-isaac-ros-dnn-image-encoder \
 ros-humble-isaac-ros-detectnet ros-humble-isaac-ros-triton ros-humble-isaac-ros-dnn-image-encoder && \
