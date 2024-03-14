@@ -14,6 +14,7 @@ class DetectSubscriber(Node):
             10)
 
     def listener_callback(self, msg):
+        self.get_logger().info("test")
         for detection in msg.detections:
             self.get_logger().info(
                 f'Detected: {detection.label} {detection.bbox.center.x:.2f} {detection.bbox.center.y:.2f} {detection.bbox.size_x:.2f} {detection.bbox.size_y:.2f}')
