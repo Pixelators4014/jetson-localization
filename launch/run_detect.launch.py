@@ -34,7 +34,7 @@ def generate_launch_description():
             'enable_color': True,
             'enable_depth': False,
             'depth_module.emitter_enabled': 0,
-            'depth_module.profile': '640x360x90',
+            'rgb_camera.profile': '1920×1080x30',
             'enable_gyro': True,
             'enable_accel': True,
             'gyro_fps': 200,
