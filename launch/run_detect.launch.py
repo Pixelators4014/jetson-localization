@@ -49,8 +49,8 @@ def generate_launch_description():
             plugin='nvidia::isaac_ros::dnn_inference::DnnImageEncoderNode',
             name='dnn_image_encoder',
             parameters=[{
-                'input_image_width': 640,
-                'input_image_height': 640,
+                'input_image_width': 1920,
+                'input_image_height': 1080,
                 'network_image_width': 640,
                 'network_image_height': 640,
                 'image_mean': [0.0, 0.0, 0.0],
