@@ -94,4 +94,11 @@ def generate_launch_description():
         namespace=''
     )
 
-    return launch.LaunchDescription([tensor_rt_container, realsense_camera_node])
+    comms_node = Node(
+        name='comms_node',
+        namespace='',
+        package='comms_node',
+        executable='detect_subscriber',
+    )
+
+    return launch.LaunchDescription([tensor_rt_container, realsense_camera_node, comms_node])
