@@ -18,7 +18,8 @@ class DetectSubscriber(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    rclpy.spin(DetectSubscriber())
+    subscriber = DetectSubscriber()
+    rclpy.spin(subscriber)
 
 if __name__ == '__main__':
     main()
