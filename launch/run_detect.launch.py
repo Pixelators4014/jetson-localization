@@ -40,7 +40,8 @@ def generate_launch_description():
             'gyro_fps': 200,
             'accel_fps': 200,
             'unite_imu_method': 2
-        }]
+        }],
+        remappings=[('/camera/color/image_raw', '/image')]
     )
 
     encoder_node = ComposableNode(
