@@ -45,7 +45,7 @@ def generate_launch_description():
 
     """Generate launch description for TensorRT ROS 2 node with hardcoded parameters."""
     # Hardcoded parameters
-    model_file_path = '/tmp/yolov8s.onnx'
+    model_file_path = '/workspaces/isaac_ros-dev/src/jetson-localization/yolov8s.onnx'
     engine_file_path = '/tmp/yolov8s.plan'
     input_tensor_names = '["images"]'
     input_binding_names = '["images"]'
