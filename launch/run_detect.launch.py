@@ -43,64 +43,45 @@ def generate_launch_description():
         }]
     )
 
-    """Generate launch description for TensorRT ROS 2 node with hardcoded parameters."""
-    # Hardcoded parameters
-    model_file_path = '/workspaces/isaac_ros-dev/src/jetson-localization/yolov8s.onnx'
-    engine_file_path = '/tmp/yolov8s.plan'
-    input_tensor_names = ["images"]
-    input_binding_names = ["images"]
-    output_tensor_names = ["output0"]
-    output_binding_names = ["output0"]
-    verbose = False
-    force_engine_update = False
-    input_image_width = 640
-    input_image_height = 640
-    network_image_width = 640
-    network_image_height = 640
-    image_mean = [0.0, 0.0, 0.0]
-    image_stddev = [1.0, 1.0, 1.0]
-    confidence_threshold = 0.25
-    nms_threshold = 0.45
-
     encoder_node = ComposableNode(
-        name='dnn_image_encoder',
-        package='isaac_ros_dnn_image_encoder',
-        plugin='nvidia::isaac_ros::dnn_inference::DnnImageEncoderNode',
-        parameters=[{
-            'input_image_width': input_image_width,
-            'input_image_height': input_image_height,
-            'network_image_width': network_image_width,
-            'network_image_height': network_image_height,
-            'image_mean': image_mean,
-            'image_stddev': image_stddev,
-        }]
-    )
+            package='isaac_ros_dnn_image_encoder',
+            plugin='nvidia::isaac_ros::dnn_inference::DnnImageEncoderNode',
+            name='dnn_image_encoder',
+            parameters=[{
+                'input_image_width': 640,
+                'input_image_height': 640,
+                'network_image_width': 640,
+                'network_image_height': 640,
+                'image_mean': [0.0, 0.0, 0.0],
+                'image_stddev': [1.0, 1.0, 1.0],
+            }]
+        )
 
     tensor_rt_node = ComposableNode(
-        name='tensor_rt',
-        package='isaac_ros_tensor_rt',
-        plugin='nvidia::isaac_ros::dnn_inference::TensorRTNode',
-        parameters=[{
-            'model_file_path': model_file_path,
-            'engine_file_path': engine_file_path,
-            'output_binding_names': output_binding_names,
-            'output_tensor_names': output_tensor_names,
-            'input_tensor_names': input_tensor_names,
-            'input_binding_names': input_binding_names,
-            'verbose': verbose,
-            'force_engine_update': force_engine_update
-        }]
-    )
+            package='isaac_ros_tensor_rt',
+            plugin='nvidia::isaac_ros::dnn_inference::TensorRTNode',
+            name='tensor_rt',
+            parameters=[{
+                'model_file_path': '/workspaces/isaac_ros-dev/src/jetson-localization/yolov8s.onnx',
+                'engine_file_path': '/tmp/yolov8s.plan',
+                'input_tensor_names': ['images'],
+                'output_tensor_names': ['output0'],
+                'input_binding_names': ['images'],
+                'output_binding_names': ['output0'],
+                'verbose': False,
+                'force_engine_update': False
+            }]
+        )
 
     yolov8_decoder_node = ComposableNode(
-        name='yolov8_decoder_node',
-        package='isaac_ros_yolov8',
-        plugin='nvidia::isaac_ros::yolov8::YoloV8DecoderNode',
-        parameters=[{
-            'confidence_threshold': confidence_threshold,
-            'nms_threshold': nms_threshold,
-        }]
-    )
+            package='isaac_ros_yolov8',
+            plugin='nvidia::isaac_ros::yolov8::YoloV8DecoderNode',
+            name='yolov8_decoder_node',
+            parameters=[{
+                'confidence_threshold': 0.25,
+                'nms_threshold': 0.45,
+            }]
+        )
 
     tensor_rt_container = ComposableNodeContainer(
         name='tensor_rt_container',
