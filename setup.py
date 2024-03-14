@@ -14,6 +14,7 @@ setup(
         ('share/' + package_name, ['package.xml']),
         ('share/' + package_name, ['launch/run_logger.launch.py']),
         ('share/' + package_name, ['launch/run_network_tables.launch.py']),
+        ('share/' + package_name, ['launch/run_detect.launch.py']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
