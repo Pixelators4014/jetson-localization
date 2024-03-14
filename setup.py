@@ -28,6 +28,7 @@ setup(
             'detect_subscriber = comms_node.detect_subscriber:main',
             'log_subscriber = comms_node.log_pose_subscriber:main',
             'network_tables_subscriber = comms_node.network_tables_subscriber:main',
+            'save_map = comms_node.save_map:main',
         ],
     },
 )
