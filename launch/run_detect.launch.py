@@ -60,7 +60,7 @@ def generate_launch_description():
         package='isaac_ros_tensor_rt',
         plugin='nvidia::isaac_ros::dnn_inference::TensorRTNode',
         parameters=[{
-            'model_file_path': '/workspaces/isaac_ros-dev/src/jetson-localization/yolov8s.onnx',
+            'model_file_path': '/tmp/yolov8s.onnx',
             'engine_file_path': '/tmp/yolov8s.plan',
             'output_binding_names': ['output0'],
             'output_tensor_names': ['output0'],
