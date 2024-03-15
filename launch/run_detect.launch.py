@@ -52,8 +52,7 @@ def generate_launch_description():
                 'image_mean': [0.0, 0.0, 0.0],
                 'image_stddev': [1.0, 1.0, 1.0],
             }]
-        )
-
+        ),
         package='isaac_ros_dnn_image_encoder',
         plugin='nvidia::isaac_ros::dnn_inference::DnnImageEncoderNode',
         name='dnn_image_encoder',
