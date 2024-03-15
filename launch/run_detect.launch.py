@@ -40,16 +40,16 @@ def generate_launch_description():
                         ('/color/camera_info', '/camera_info')]
         )
 
-    resize_node = ComposableNode(
-        name='resize_node',
-        package='isaac_ros_image_proc',
-        plugin='nvidia::isaac_ros::image_proc::ResizeNode',
-        namespace='',
-        parameters=[{
-            'output_width': 640,
-            'output_height': 640,
-        }]
-    )
+    # resize_node = ComposableNode(
+    #     name='resize_node',
+    #     package='isaac_ros_image_proc',
+    #     plugin='nvidia::isaac_ros::image_proc::ResizeNode',
+    #     namespace='',
+    #     parameters=[{
+    #         'output_width': 640,
+    #         'output_height': 640,
+    #     }]
+    # )
 
     encoder_node = ComposableNode(
         name='dnn_image_encoder',
@@ -108,7 +108,7 @@ def generate_launch_description():
             tensor_rt_node,
             yolov8_decoder_node,
             realsense_camera_node,
-            resize_node
+            # resize_node
         ],
         output='screen',
         arguments=['--ros-args', '--log-level', 'INFO'],
