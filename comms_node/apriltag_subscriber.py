@@ -16,7 +16,7 @@ class DetectSubscriber(Node):
     def listener_callback(self, msg):
         self.get_logger().info("test")
         for detection in msg.detections:
-            self.get_logger().info(detection.pose.pose.pose.position.x, detection.pose.pose.pose.position.y, detection.pose.pose.pose.position.z)
+            self.get_logger().info(f"{detection.pose.pose.pose.position.x:.2f}, {detection.pose.pose.pose.position.y:.2f}, {detection.pose.pose.pose.position.z:.2f}")
 
 def main(args=None):
     rclpy.init(args=args)
