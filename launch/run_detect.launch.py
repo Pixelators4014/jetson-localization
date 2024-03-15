@@ -30,8 +30,8 @@ def generate_launch_description():
             name='realsense2_camera',
             namespace='',
             parameters=[{
-                'color_height': 640,
-                'color_width': 640,
+                'color_height': 1080,
+                'color_width': 1920,
                 'enable_infra1': False,
                 'enable_infra2': False,
                 'enable_depth': False,
@@ -40,11 +40,22 @@ def generate_launch_description():
                         ('/color/camera_info', '/camera_info')]
         )
 
+    resize_node = ComposableNode(
+        name='resize_node',
+        package='isaac_ros_image_proc',
+        plugin='nvidia::isaac_ros::image_proc::ResizeNode',
+        namespace='',
+        parameters=[{
+            'output_width': 640,
+            'output_height': 640,
+        }]
+    )
+
     encoder_node = ComposableNode(
         name='dnn_image_encoder',
         package='isaac_ros_dnn_image_encoder',
         plugin='nvidia::isaac_ros::dnn_inference::DnnImageEncoderNode',
-        remappings=[('encoded_tensor', 'tensor_pub')],
+        remappings=[('encoded_tensor', 'tensor_pub'), ('image', 'resize/image')],
         parameters=[{
             'input_image_width': 640,
             'input_image_height': 640,
@@ -103,4 +114,4 @@ def generate_launch_description():
         namespace=''
     )
 
-    return launch.LaunchDescription([tensor_rt_container, comms_node])
+    return launch.LaunchDescription([tensor_rt_container, resize_node, comms_node])
