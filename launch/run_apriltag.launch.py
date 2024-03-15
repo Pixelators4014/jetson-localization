@@ -16,7 +16,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import launch
-from launch_ros.actions import ComposableNodeContainer
+from launch_ros.actions import ComposableNodeContainer, Node
 from launch_ros.descriptions import ComposableNode
 
 
