@@ -107,11 +107,12 @@ def generate_launch_description():
             encoder_node,
             tensor_rt_node,
             yolov8_decoder_node,
-            realsense_camera_node
+            realsense_camera_node,
+            resize_node
         ],
         output='screen',
         arguments=['--ros-args', '--log-level', 'INFO'],
         namespace=''
     )
 
-    return launch.LaunchDescription([tensor_rt_container, resize_node, comms_node])
+    return launch.LaunchDescription([tensor_rt_container, comms_node])
