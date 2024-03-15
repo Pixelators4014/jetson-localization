@@ -76,10 +76,10 @@ def generate_launch_description():
         parameters=[{
             'model_file_path': '/tmp/yolov8s.onnx',
             'engine_file_path': '/tmp/yolov8s.plan',
-            'output_binding_names': ['output0'],
-            'output_tensor_names': ['output0'],
-            'input_tensor_names': ['images'],
-            'input_binding_names': ['images'],
+            'output_binding_names': ["output0"],
+            'output_tensor_names': ["output_tensor"],
+            'input_tensor_names': ["input_tensor"],
+            'input_binding_names': ["images"],
             'verbose': False,
             'force_engine_update': False
         }]
