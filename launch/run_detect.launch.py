@@ -24,21 +24,21 @@ from launch_ros.descriptions import ComposableNode
 
 def generate_launch_description():
     """Launch file which brings up visual slam node configured for RealSense."""
-    realsense_camera_node = ComposableNode(
-            package='realsense2_camera',
-            plugin='realsense2_camera::RealSenseNodeFactory',
-            name='realsense2_camera',
-            namespace='',
-            parameters=[{
-                'color_height': 1080,
-                'color_width': 1920,
-                'enable_infra1': False,
-                'enable_infra2': False,
-                'enable_depth': False,
-            }],
-            remappings=[('/color/image_raw', '/image'),
-                        ('/color/camera_info', '/camera_info')]
-        )
+    # realsense_camera_node = ComposableNode(
+    #         package='realsense2_camera',
+    #         plugin='realsense2_camera::RealSenseNodeFactory',
+    #         name='realsense2_camera',
+    #         namespace='',
+    #         parameters=[{
+    #             'color_height': 1080,
+    #             'color_width': 1920,
+    #             'enable_infra1': False,
+    #             'enable_infra2': False,
+    #             'enable_depth': False,
+    #         }],
+    #         remappings=[('/color/image_raw', '/image'),
+    #                     ('/color/camera_info', '/camera_info')]
+    #     )
 
     # resize_node = ComposableNode(
     #     name='resize_node',
@@ -55,7 +55,10 @@ def generate_launch_description():
         name='dnn_image_encoder',
         package='isaac_ros_dnn_image_encoder',
         plugin='nvidia::isaac_ros::dnn_inference::DnnImageEncoderNode',
-        remappings=[('encoded_tensor', 'tensor_pub'), ('image', 'resize/image')],
+        remappings=[
+            ('encoded_tensor', 'tensor_pub'),
+            # ('image', 'resize/image')
+        ],
         parameters=[{
             'input_image_width': 640,
             'input_image_height': 640,
@@ -107,7 +110,7 @@ def generate_launch_description():
             encoder_node,
             tensor_rt_node,
             yolov8_decoder_node,
-            realsense_camera_node,
+            # realsense_camera_node,
             # resize_node
         ],
         output='screen',
