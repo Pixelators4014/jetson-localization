@@ -39,7 +39,3 @@ class SaveMapActionClient(Node):
         else:
             self.get_logger().info('Save Map Action Failed: {}'.format(result.error))
         rclpy.shutdown()
-
-# action_client = FibonacciActionClient()
-# action_client.send_goal("/maps/m1.vlm")
-# rclpy.spin(action_client)

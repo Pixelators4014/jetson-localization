@@ -2,9 +2,18 @@ import rclpy
 from rclpy.node import Node
 
 from networktables import NetworkTables
+from nav_msgs.msg import Path
 
 
-from comms_node.slam_path_subscriber import SlamPathSubscriber
+class SlamPathSubscriber(Node):
+
+    def __init__(self, name):
+        super().__init__(name)
+        self.subscription = self.create_subscription(
+            Path,
+            '/visual_slam/tracking/slam_path',
+            self.listener_callback,
+            10)
 
 
 def serialize_response(poses):
