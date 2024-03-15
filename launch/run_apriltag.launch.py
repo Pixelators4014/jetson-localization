@@ -55,12 +55,12 @@ def generate_launch_description():
                     ('/color/camera_info', '/camera_info')]
     )
 
-    # comms_node = Node(
-    #     name='comms_node',
-    #     namespace='',
-    #     package='comms_node',
-    #     executable='detect_subscriber',
-    # )
+    comms_node = Node(
+        name='comms_node',
+        namespace='',
+        package='comms_node',
+        executable='detect_subscriber',
+    )
 
     apriltag_container = ComposableNodeContainer(
         package='rclcpp_components',
@@ -70,10 +70,9 @@ def generate_launch_description():
         composable_node_descriptions=[
             rectify_node,
             apriltag_node,
-            realsense_camera_node,
-            # comms_node
+            realsense_camera_node
         ],
         output='screen'
     )
 
-    return launch.LaunchDescription([apriltag_container])
+    return launch.LaunchDescription([apriltag_container, comms_node])

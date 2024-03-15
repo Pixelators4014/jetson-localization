@@ -41,8 +41,7 @@ def generate_launch_description():
         )
 
     encoder_node = ComposableNode(
-<<<<<<< HEAD
-            package='isaac_ros_dnn_image_encoder',
+        package='isaac_ros_dnn_image_encoder',
             plugin='nvidia::isaac_ros::dnn_inference::DnnImageEncoderNode',
             name='dnn_image_encoder',
             parameters=[{
@@ -54,7 +53,7 @@ def generate_launch_description():
                 'image_stddev': [1.0, 1.0, 1.0],
             }]
         )
-=======
+
         package='isaac_ros_dnn_image_encoder',
         plugin='nvidia::isaac_ros::dnn_inference::DnnImageEncoderNode',
         name='dnn_image_encoder',
@@ -67,7 +66,6 @@ def generate_launch_description():
             'image_stddev': [1.0, 1.0, 1.0],
         }]
     )
->>>>>>> adac74e83f39af810a7632c6a7e2eaad112fa157
 
     tensor_rt_node = ComposableNode(
         package='isaac_ros_tensor_rt',
@@ -106,10 +104,10 @@ def generate_launch_description():
         name='tensor_rt_container',
         package='rclcpp_components',
         executable='component_container_mt',
-        composable_node_descriptions=[encoder_node, tensor_rt_node, yolov8_decoder_node, realsense_camera_node, comms_node],
+        composable_node_descriptions=[encoder_node, tensor_rt_node, yolov8_decoder_node, realsense_camera_node],
         output='screen',
         arguments=['--ros-args', '--log-level', 'INFO'],
         namespace=''
     )
 
-    return launch.LaunchDescription([tensor_rt_container])
+    return launch.LaunchDescription([tensor_rt_container, comms_node])
