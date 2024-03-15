@@ -24,32 +24,32 @@ from launch_ros.descriptions import ComposableNode
 
 def generate_launch_description():
     """Launch file which brings up visual slam node configured for RealSense."""
-    # realsense_camera_node = ComposableNode(
-    #         package='realsense2_camera',
-    #         plugin='realsense2_camera::RealSenseNodeFactory',
-    #         name='realsense2_camera',
-    #         namespace='',
-    #         parameters=[{
-    #             'color_height': 1080,
-    #             'color_width': 1920,
-    #             'enable_infra1': False,
-    #             'enable_infra2': False,
-    #             'enable_depth': False,
-    #         }],
-    #         remappings=[('/color/image_raw', '/image'),
-    #                     ('/color/camera_info', '/camera_info')]
-    #     )
+    realsense_camera_node = ComposableNode(
+            package='realsense2_camera',
+            plugin='realsense2_camera::RealSenseNodeFactory',
+            name='realsense2_camera',
+            namespace='',
+            parameters=[{
+                'color_height': 1080,
+                'color_width': 1920,
+                'enable_infra1': False,
+                'enable_infra2': False,
+                'enable_depth': False,
+            }],
+            remappings=[('/color/image_raw', '/image'),
+                        ('/color/camera_info', '/camera_info')]
+        )
 
-    # resize_node = ComposableNode(
-    #     name='resize_node',
-    #     package='isaac_ros_image_proc',
-    #     plugin='nvidia::isaac_ros::image_proc::ResizeNode',
-    #     namespace='',
-    #     parameters=[{
-    #         'output_width': 640,
-    #         'output_height': 640,
-    #     }]
-    # )
+    resize_node = ComposableNode(
+        name='resize_node',
+        package='isaac_ros_image_proc',
+        plugin='nvidia::isaac_ros::image_proc::ResizeNode',
+        namespace='',
+        parameters=[{
+            'output_width': 640,
+            'output_height': 640,
+        }]
+    )
 
     encoder_node = ComposableNode(
         name='dnn_image_encoder',
@@ -57,7 +57,7 @@ def generate_launch_description():
         plugin='nvidia::isaac_ros::dnn_inference::DnnImageEncoderNode',
         remappings=[
             ('encoded_tensor', 'tensor_pub'),
-            # ('image', 'resize/image')
+            ('image', 'resize/image')
         ],
         parameters=[{
             'input_image_width': 640,
@@ -110,8 +110,8 @@ def generate_launch_description():
             encoder_node,
             tensor_rt_node,
             yolov8_decoder_node,
-            # realsense_camera_node,
-            # resize_node
+            realsense_camera_node,
+            resize_node
         ],
         output='screen',
         arguments=['--ros-args', '--log-level', 'INFO'],
