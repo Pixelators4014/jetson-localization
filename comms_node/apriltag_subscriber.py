@@ -3,8 +3,12 @@ from rclpy.node import Node
 
 from isaac_ros_apriltag_interfaces.msg import AprilTagDetectionArray
 
+from networktables import NetworkTables
 
-class DetectSubscriber(Node):
+from comms_node.util import serialize_response
+
+
+class AprilTagsSubscriber(Node):
     def __init__(self):
         super().__init__('detect_subscriber')
         self.subscription = self.create_subscription(
@@ -12,16 +16,16 @@ class DetectSubscriber(Node):
             '/tag_detections',
             self.listener_callback,
             10)
+        self.sd = NetworkTables.getTable('Orin')
 
     def listener_callback(self, msg):
-        for detection in msg.detections:
-            self.get_logger().info(
-                f"{detection.pose.pose.pose.position.x:.2f}, {detection.pose.pose.pose.position.y:.2f}, {detection.pose.pose.pose.position.z:.2f}")
+        self.get_logger().info('%s detections' % len(msg.detections))
+        self.sd.putString("APRILTAGS", serialize_response(msg.detections))
 
 
 def main(args=None):
     rclpy.init(args=args)
-    subscriber = DetectSubscriber()
+    subscriber = AprilTagsSubscriber()
     rclpy.spin(subscriber)
 
 

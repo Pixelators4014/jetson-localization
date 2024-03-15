@@ -4,34 +4,21 @@ from rclpy.node import Node
 from networktables import NetworkTables
 from nav_msgs.msg import Path
 
+from comms_node.util import serialize_response
 
-class SlamPathSubscriber(Node):
 
-    def __init__(self, name):
-        super().__init__(name)
+class NetworkTablesSlamPathSubscriber(Node):
+    def __init__(self):
+        super().__init__('network_tables_pose_subscriber')
         self.subscription = self.create_subscription(
             Path,
             '/visual_slam/tracking/slam_path',
             self.listener_callback,
             10)
-
-
-def serialize_response(poses):
-    s = ""
-    for pose in poses:
-        p = pose.pose
-        s += "{} {:.2f} {:.2f} {:.2f} {:.2f} {:.2f} {:.2f} {:.2f}\n".format(
-            pose.header.stamp.sec, p.position.x, p.position.y, p.position.z,
-            p.orientation.x, p.orientation.y, p.orientation.z, p.orientation.w)
-    return s
-
-
-class NetworkTablesSlamPathSubscriber(SlamPathSubscriber):
-    def __init__(self):
-        super().__init__('network_tables_pose_subscriber')
         self.sd = NetworkTables.getTable('Orin')
 
     def listener_callback(self, msg):
+        self.get_logger().info('Received SLAM path')
         self.sd.putString("POSE", serialize_response(msg.poses))
 
 

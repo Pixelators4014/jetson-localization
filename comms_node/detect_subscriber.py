@@ -3,6 +3,10 @@ from rclpy.node import Node
 
 from vision_msgs.msg import Detection2DArray
 
+from networktables import NetworkTables
+
+from comms_node.util import serialize_response
+
 
 class DetectSubscriber(Node):
     def __init__(self):
@@ -12,13 +16,11 @@ class DetectSubscriber(Node):
             '/detections_output',
             self.listener_callback,
             10)
+        self.sd = NetworkTables.getTable('Orin')
 
     def listener_callback(self, msg):
-        for detection in msg.detections:
-            self.get_logger().info(
-                # f"{detection.bbox.center.x:.2f}, {detection.bbox.center.y:.2f}, {detection.bbox.size_x:.2f}, {detection.bbox.size_y:.2f}"
-                f"{detection.bbox.size_x:.2f}, {detection.bbox.size_y:.2f}"
-            )
+        self.get_logger().info('%s detections' % len(msg.detections))
+        self.sd.putString("DETECTIONS", serialize_response(msg.detections))
 
 
 def main(args=None):
