@@ -21,6 +21,7 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import ComposableNodeContainer, Node
 from launch_ros.descriptions import ComposableNode
 
+
 def generate_launch_description():
     """Launch file which brings up visual slam node configured for RealSense."""
     realsense_camera_node = ComposableNode(
@@ -40,6 +41,7 @@ def generate_launch_description():
         )
 
     encoder_node = ComposableNode(
+<<<<<<< HEAD
             package='isaac_ros_dnn_image_encoder',
             plugin='nvidia::isaac_ros::dnn_inference::DnnImageEncoderNode',
             name='dnn_image_encoder',
@@ -52,32 +54,46 @@ def generate_launch_description():
                 'image_stddev': [1.0, 1.0, 1.0],
             }]
         )
+=======
+        package='isaac_ros_dnn_image_encoder',
+        plugin='nvidia::isaac_ros::dnn_inference::DnnImageEncoderNode',
+        name='dnn_image_encoder',
+        parameters=[{
+            'input_image_width': 640,
+            'input_image_height': 480,
+            'network_image_width': 640,
+            'network_image_height': 640,
+            'image_mean': [0.0, 0.0, 0.0],
+            'image_stddev': [1.0, 1.0, 1.0],
+        }]
+    )
+>>>>>>> adac74e83f39af810a7632c6a7e2eaad112fa157
 
     tensor_rt_node = ComposableNode(
-            package='isaac_ros_tensor_rt',
-            plugin='nvidia::isaac_ros::dnn_inference::TensorRTNode',
-            name='tensor_rt',
-            parameters=[{
-                'model_file_path': '/workspaces/isaac_ros-dev/src/jetson-localization/yolov8s.onnx',
-                'engine_file_path': '/tmp/yolov8s.plan',
-                'input_tensor_names': ['images'],
-                'output_tensor_names': ['output0'],
-                'input_binding_names': ['images'],
-                'output_binding_names': ['output0'],
-                'verbose': False,
-                'force_engine_update': False
-            }]
-        )
+        package='isaac_ros_tensor_rt',
+        plugin='nvidia::isaac_ros::dnn_inference::TensorRTNode',
+        name='tensor_rt',
+        parameters=[{
+            'model_file_path': '/workspaces/isaac_ros-dev/src/jetson-localization/yolov8s.onnx',
+            'engine_file_path': '/tmp/yolov8s.plan',
+            'input_tensor_names': ['images'],
+            'output_tensor_names': ['output0'],
+            'input_binding_names': ['images'],
+            'output_binding_names': ['output0'],
+            'verbose': False,
+            'force_engine_update': False
+        }]
+    )
 
     yolov8_decoder_node = ComposableNode(
-            package='isaac_ros_yolov8',
-            plugin='nvidia::isaac_ros::yolov8::YoloV8DecoderNode',
-            name='yolov8_decoder_node',
-            parameters=[{
-                'confidence_threshold': 0.25,
-                'nms_threshold': 0.45,
-            }]
-        )
+        package='isaac_ros_yolov8',
+        plugin='nvidia::isaac_ros::yolov8::YoloV8DecoderNode',
+        name='yolov8_decoder_node',
+        parameters=[{
+            'confidence_threshold': 0.25,
+            'nms_threshold': 0.45,
+        }]
+    )
 
     comms_node = Node(
         name='comms_node',
