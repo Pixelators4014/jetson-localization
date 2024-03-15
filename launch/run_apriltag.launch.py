@@ -59,7 +59,7 @@ def generate_launch_description():
         name='comms_node',
         namespace='',
         package='comms_node',
-        executable='detect_subscriber',
+        executable='apriltag_subscriber',
     )
 
     apriltag_container = ComposableNodeContainer(
