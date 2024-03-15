@@ -12,8 +12,8 @@ setup(
     data_files=[
         ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name, ['launch/run_logger.launch.py']),
-        ('share/' + package_name, ['launch/run_network_tables.launch.py']),
+        ('share/' + package_name, ['launch/run_all.launch.py']),
+        ('share/' + package_name, ['launch/run_vslam.launch.py']),
         ('share/' + package_name, ['launch/run_detect.launch.py']),
         ('share/' + package_name, ['launch/run_apriltag.launch.py']),
     ],
