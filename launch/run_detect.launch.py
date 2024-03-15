@@ -25,20 +25,20 @@ from launch_ros.descriptions import ComposableNode
 def generate_launch_description():
     """Launch file which brings up visual slam node configured for RealSense."""
     realsense_camera_node = ComposableNode(
-            package='realsense2_camera',
-            plugin='realsense2_camera::RealSenseNodeFactory',
-            name='realsense2_camera',
-            namespace='',
-            parameters=[{
-                'color_height': 1080,
-                'color_width': 1920,
-                'enable_infra1': False,
-                'enable_infra2': False,
-                'enable_depth': False,
-            }],
-            remappings=[('/color/image_raw', '/image'),
-                        ('/color/camera_info', '/camera_info')]
-        )
+        package='realsense2_camera',
+        plugin='realsense2_camera::RealSenseNodeFactory',
+        name='realsense2_camera',
+        namespace='',
+        parameters=[{
+            'color_height': 1080,
+            'color_width': 1920,
+            'enable_infra1': False,
+            'enable_infra2': False,
+            'enable_depth': False,
+        }],
+        remappings=[('/color/image_raw', '/image'),
+                    ('/color/camera_info', '/camera_info')]
+    )
 
     resize_node = ComposableNode(
         name='resize_node',
