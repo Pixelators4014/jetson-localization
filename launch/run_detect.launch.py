@@ -23,33 +23,29 @@ from launch_ros.descriptions import ComposableNode
 
 def generate_launch_description():
     """Launch file which brings up visual slam node configured for RealSense."""
-    realsense_camera_node = Node(
-        name='camera',
-        namespace='camera',
-        package='realsense2_camera',
-        executable='realsense2_camera_node',
-        parameters=[{
-            'enable_infra1': False,
-            'enable_infra2': False,
-            'enable_color': True,
-            'enable_depth': False,
-            'depth_module.emitter_enabled': 0,
-            'enable_gyro': True,
-            'enable_accel': True,
-            'gyro_fps': 200,
-            'accel_fps': 200,
-            'unite_imu_method': 2
-        }],
-        remappings=[('/camera/color/image_raw', '/image')]
-    )
+    realsense_camera_node = ComposableNode(
+            package='realsense2_camera',
+            plugin='realsense2_camera::RealSenseNodeFactory',
+            name='realsense2_camera',
+            namespace='',
+            parameters=[{
+                'color_height': 1080,
+                'color_width': 1920,
+                'enable_infra1': False,
+                'enable_infra2': False,
+                'enable_depth': False,
+            }],
+            remappings=[('/color/image_raw', '/image'),
+                        ('/color/camera_info', '/camera_info')]
+        )
 
     encoder_node = ComposableNode(
             package='isaac_ros_dnn_image_encoder',
             plugin='nvidia::isaac_ros::dnn_inference::DnnImageEncoderNode',
             name='dnn_image_encoder',
             parameters=[{
-                'input_image_width': 640,
-                'input_image_height': 480,
+                'input_image_width': 1920,
+                'input_image_height': 1080,
                 'network_image_width': 640,
                 'network_image_height': 640,
                 'image_mean': [0.0, 0.0, 0.0],
@@ -83,16 +79,6 @@ def generate_launch_description():
             }]
         )
 
-    tensor_rt_container = ComposableNodeContainer(
-        name='tensor_rt_container',
-        package='rclcpp_components',
-        executable='component_container_mt',
-        composable_node_descriptions=[encoder_node, tensor_rt_node, yolov8_decoder_node],
-        output='screen',
-        arguments=['--ros-args', '--log-level', 'INFO'],
-        namespace=''
-    )
-
     comms_node = Node(
         name='comms_node',
         namespace='',
@@ -100,4 +86,14 @@ def generate_launch_description():
         executable='detect_subscriber',
     )
 
-    return launch.LaunchDescription([tensor_rt_container, realsense_camera_node, comms_node])
+    tensor_rt_container = ComposableNodeContainer(
+        name='tensor_rt_container',
+        package='rclcpp_components',
+        executable='component_container_mt',
+        composable_node_descriptions=[encoder_node, tensor_rt_node, yolov8_decoder_node, realsense_camera_node, comms_node],
+        output='screen',
+        arguments=['--ros-args', '--log-level', 'INFO'],
+        namespace=''
+    )
+
+    return launch.LaunchDescription([tensor_rt_container])
