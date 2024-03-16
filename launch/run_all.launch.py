@@ -22,6 +22,7 @@ from launch_ros.descriptions import ComposableNode
 
 def generate_launch_description():
     """Launch file which brings up visual slam node configured for RealSense."""
+    ld = launch.LaunchDescription()
     realsense_camera_node = ComposableNode(
         package='realsense2_camera',
         plugin='realsense2_camera::RealSenseNodeFactory',
@@ -214,8 +215,11 @@ def generate_launch_description():
         package='comms_node',
         executable='vslam_subscriber',
     )
-
-    return launch.LaunchDescription([realsense_camera_node,
-                                     apriltag_container, apriltag_comms_node,
-                                     detect_comms_node, tensor_rt_container,
-                                     visual_slam_launch_container, vslam_comms_node])
+    ld.add_action(realsense_camera_node)
+    ld.add_action(apriltag_container)
+    ld.add_action(apriltag_comms_node)
+    ld.add_action(detect_comms_node)
+    ld.add_action(tensor_rt_container)
+    ld.add_action(visual_slam_launch_container)
+    ld.add_action(vslam_comms_node)
+    return ld
