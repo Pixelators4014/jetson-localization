@@ -1,0 +1,11 @@
+[Unit]
+Description=Ngrok TCP 22
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/ngrok tcp 22
+Restart=always
+User=alistair
+
+[Install]
+WantedBy=multi-user.target
