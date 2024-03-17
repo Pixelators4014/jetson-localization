@@ -22,9 +22,10 @@ class DataIntegrationNode(NetworkTablesNode):
         while rclpy.ok():
             vslam_path = self.sd.getString("VSLAM_PATH")
             if vslam_path is not None:
-                if len(vslam_path) > 0:
-                    last_vslam_path = vslam_path[-1]
-                    theta = last_vslam_path[""]
+                if len(vslam_path.poses) > 0:
+                    last_vslam_stamped_pose = vslam_path[-1]
+                    pose = last_vslam_stamped_pose.pose
+                    print(pose)
             rclpy.spin_once(self, timeout_sec=0.1)
 
 
