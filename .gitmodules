@@ -1,3 +1,0 @@
-[submodule "isaac_ros_visual_slam"]
-	path = isaac_ros_visual_slam
-	url = https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam
