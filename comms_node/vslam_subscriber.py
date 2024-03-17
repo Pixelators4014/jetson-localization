@@ -7,7 +7,7 @@ from comms_node.network_tables_node import NetworkTablesNode
 from comms_node.util import serialize_response
 
 
-class NetworkTablesSlamPathSubscriber(NetworkTablesNode):
+class VSlamPathSubscriber(NetworkTablesNode):
     def __init__(self):
         super().__init__('vslam_pose_subscriber')
         self.subscription = self.create_subscription(
@@ -18,12 +18,12 @@ class NetworkTablesSlamPathSubscriber(NetworkTablesNode):
 
     def listener_callback(self, msg):
         self.get_logger().info('Received SLAM path')
-        self.sd.putString("POSE", serialize_response(msg.poses))
+        self.sd.putString("VSLAM_PATH", serialize_response(msg.poses))
 
 
 def main(args=None):
     rclpy.init(args=args)
-    subscriber = NetworkTablesSlamPathSubscriber()
+    subscriber = VSlamPathSubscriber()
     rclpy.spin(subscriber)
     subscriber.destroy_node()
     rclpy.shutdown()

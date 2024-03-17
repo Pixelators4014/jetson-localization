@@ -71,12 +71,6 @@ def generate_launch_description():
         name='apriltag',
         namespace=''
     )
-    apriltag_comms_node = Node(
-        name='comms_node',
-        namespace='',
-        package='comms_node',
-        executable='apriltag_subscriber',
-    )
 
     apriltag_container = ComposableNodeContainer(
         package='rclcpp_components',
@@ -146,14 +140,6 @@ def generate_launch_description():
             'nms_threshold': 0.45,
         }]
     )
-
-    detect_comms_node = Node(
-        name='comms_node',
-        namespace='',
-        package='comms_node',
-        executable='detect_subscriber',
-    )
-
     tensor_rt_container = ComposableNodeContainer(
         name='tensor_rt_container',
         package='rclcpp_components',
@@ -212,7 +198,7 @@ def generate_launch_description():
         output='screen'
     )
 
-    vslam_comms_node = Node(
+    integrated_comms_node = Node(
         name='comms_node',
         namespace='',
         package='comms_node',
@@ -221,9 +207,7 @@ def generate_launch_description():
     ld = launch.LaunchDescription(launch_args)
     ld.add_action(realsense_camera_node)
     ld.add_action(apriltag_container)
-    ld.add_action(apriltag_comms_node)
-    ld.add_action(detect_comms_node)
     ld.add_action(tensor_rt_container)
     ld.add_action(visual_slam_launch_container)
-    ld.add_action(vslam_comms_node)
+    ld.add_action(integrated_comms_node)
     return ld

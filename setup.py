@@ -26,6 +26,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'integrated = comms_node.integrated:main',
             'apriltag_subscriber = comms_node.apriltag_subscriber:main',
             'detect_subscriber = comms_node.detect_subscriber:main',
             'vslam_subscriber = comms_node.vslam_subscriber:main',

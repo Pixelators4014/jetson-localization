@@ -17,7 +17,7 @@ class AprilTagsSubscriber(NetworkTablesNode):
 
     def listener_callback(self, msg):
         self.get_logger().info('%s detections' % len(msg.detections))
-        self.sd.putString("APRILTAGS", serialize_response(msg.detections))
+        self.sd.putString("RAW_APRILTAGS", serialize_response(msg.detections))
 
 
 def main(args=None):
