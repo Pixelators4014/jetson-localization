@@ -1,6 +1,4 @@
 import rclpy
-
-from networktables import NetworkTables
 from nav_msgs.msg import Path
 
 from comms_node.network_tables_node import NetworkTablesNode

@@ -3,7 +3,6 @@ import json
 import rclpy
 
 from comms_node.network_tables_node import NetworkTablesNode
-from comms_node.util import serialize_response
 
 
 class Pose:
@@ -23,7 +22,9 @@ class DataIntegrationNode(NetworkTablesNode):
         while rclpy.ok():
             vslam_path = self.sd.getString("VSLAM_PATH")
             if vslam_path is not None:
-                pass
+                if len(vslam_path) > 0:
+                    last_vslam_path = vslam_path[-1]
+                    theta = last_vslam_path[""]
             rclpy.spin_once(self, timeout_sec=0.1)
 
 
