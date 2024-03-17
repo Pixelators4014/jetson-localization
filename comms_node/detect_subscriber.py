@@ -1,14 +1,14 @@
 import rclpy
-from rclpy.node import Node
 
 from vision_msgs.msg import Detection2DArray
 
 from networktables import NetworkTables
 
+from comms_node.network_tables_node import NetworkTablesNode
 from comms_node.util import serialize_response
 
 
-class DetectSubscriber(Node):
+class DetectSubscriber(NetworkTablesNode):
     def __init__(self):
         super().__init__('detect_subscriber')
         self.subscription = self.create_subscription(
@@ -27,6 +27,8 @@ def main(args=None):
     rclpy.init(args=args)
     subscriber = DetectSubscriber()
     rclpy.spin(subscriber)
+    subscriber.destroy_node()
+    rclpy.shutdown()
 
 
 if __name__ == '__main__':
