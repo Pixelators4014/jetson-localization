@@ -17,7 +17,7 @@ setup(
         ('share/' + package_name, ['launch/run_detect.launch.py']),
         ('share/' + package_name, ['launch/run_apriltag.launch.py']),
     ],
-    install_requires=['setuptools', 'pynetworktables'],
+    install_requires=['setuptools', 'robotpy'],
     zip_safe=True,
     maintainer='alistair',
     maintainer_email='alistair@keiller.net',

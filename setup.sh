@@ -8,4 +8,4 @@ sudo apt-get autoremove -y
 cd /workspaces/isaac_ros-dev
 colcon build --symlink-install
 source install/setup.bash
-python3 -m pip install -U pynetworktables
+python3 -m pip install -r requirements.txt
