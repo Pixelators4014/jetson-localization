@@ -16,18 +16,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import launch
-from launch_ros.actions import ComposableNodeContainer, Node, DeclareLaunchArgument
+from launch_ros.actions import ComposableNodeContainer, Node
 from launch_ros.descriptions import ComposableNode
 
 
 def generate_launch_description():
     """Launch file which brings up visual slam node configured for RealSense."""
-    launch_args = [
-        DeclareLaunchArgument(
-            'network_tables_server',
-            default_value='roborio-XXX-frc.local',
-            description='The uri to the network tables server')
-    ]
     realsense_camera_node = Node(
         name='camera',
         namespace='camera',
