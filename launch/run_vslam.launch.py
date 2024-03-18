@@ -58,7 +58,7 @@ def generate_launch_description():
             'odom_frame': 'odom',
             'base_frame': 'camera_link',
             'input_imu_frame': 'camera_gyro_optical_frame',
-            'enable_imu_fusion': False,
+            'enable_imu_fusion': True,
             'gyro_noise_density': 0.000244,
             'gyro_random_walk': 0.000019393,
             'accel_noise_density': 0.001862,
